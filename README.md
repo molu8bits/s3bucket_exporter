@@ -1,5 +1,7 @@
 # S3bucket Exporter
 
+s3bucket_exporter collects informations about size and object list about all the buckets accessible by user. Was designed to work with ceph, but should work will all S3 compatible endpoints.
+
 ## Getting started
 
 Run from command-line:
