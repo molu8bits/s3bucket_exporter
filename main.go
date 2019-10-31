@@ -6,7 +6,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/molu8bits/s3bucket-exporter/controllers"
+	"github.com/molu8bits/s3bucket_exporter/controllers"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
