@@ -92,17 +92,24 @@ func S3UsageInfo(s3Conn S3Conn) (S3Summary, error) {
 }
 
 func countBucketSize(bucketName string, s3Client *s3.S3) (float64, float64) {
-	response, err := s3Client.ListObjectsV2(&s3.ListObjectsV2Input{Bucket: aws.String(bucketName)})
-	if err != nil {
-		log.Fatal(err)
-		return 0, 0
-	}
+	i := 0
 	var bucketUsage float64
 	var bucketObjects float64
 	bucketUsage, bucketObjects = 0, 0
-	for _, item := range response.Contents {
-		bucketUsage += float64(*item.Size)
-		bucketObjects++
+
+	err := s3Client.ListObjectsPages(&s3.ListObjectsInput{Bucket: aws.String(bucketName)},
+		func(p *s3.ListObjectsOutput, last bool) (shouldContinue bool) {
+			i++
+			for _, obj := range p.Contents {
+				bucketUsage += float64(*obj.Size)
+				bucketObjects++
+			}
+			return true
+		})
+
+	if err != nil {
+		log.Fatal(err)
+		return 0, 0
 	}
 	return bucketUsage, bucketObjects
 }
