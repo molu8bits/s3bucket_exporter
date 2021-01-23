@@ -1,4 +1,4 @@
-FROM golang:1.12
+FROM golang:1.12 AS builder
 
 # Dependencies
 RUN apt-get update \
@@ -19,8 +19,7 @@ COPY controllers /build/controllers
 RUN go build ./main.go
 RUN cp ./main /bin/s3bucket_exporter
 
-# Cleanup
-WORKDIR /
-RUN rm -Rf /build
-
+FROM debian:buster-slim
+COPY --from=builder /bin/s3bucket_exporter /bin/s3bucket_exporter
+WORKDIR /tmp
 ENTRYPOINT ["/bin/s3bucket_exporter"]
