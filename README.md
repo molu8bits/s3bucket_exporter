@@ -23,7 +23,7 @@ docker run -p 9655:9655 -d -e LISTEN_PORT=:9655 -e S3_DISABLE_SSL=True -e S3_END
 Run from command-line - example for AWS
 /* Please note that you need to have buckets only in one region. Otherwise script will fail with message "...BucketRegionError: incorrect region, the bucket is not in ..."  */
 ```
-/s3bucket-exporter -s3_endpoint https://s3.us-east-1.amazonaws.com -listen_port :9655 -s3_access_key ABCD12345678 -s3_secret_key mySecretKey -s3_name=My2S3Endpoint --s3_region=us-east-1 --s3_force_path_style=false --s3_disable_endpoint_host_prefix=true
+./s3bucket-exporter -s3_endpoint https://s3.us-east-1.amazonaws.com -listen_port :9655 -s3_access_key ABCD12345678 -s3_secret_key mySecretKey -s3_name=My2S3Endpoint --s3_region=us-east-1 --s3_force_path_style=false --s3_disable_endpoint_host_prefix=true
 ```
 
 The exporter supports two different configuration ways: command-line arguments take precedence over environment variables.
