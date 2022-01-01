@@ -1,0 +1,19 @@
+services:
+  s3bucketexporter:
+    image: docker.io/molu8bits/s3bucket_exporter:0.1
+    restart: always
+    ports:
+      - "9655:9655"
+    environment:
+      S3_ENDPOINT: https://s3.us-east-1.amazonaws.com
+      LISTEN_PORT: ":9655"
+      S3_ACCESS_KEY: ABCD12345678
+      S3_SECRET_KEY: mySecretKey
+      S3_NAME: MyS3Endpoint2
+      S3_REGION: us-east-1
+      S3_DISABLE_SSL: False
+      S3_DISABLE_ENDPOINT_HOST_PREFIX: True
+      S3_FORCE_PATH_STYLE: True
+      LOG_LEVEL: Info
+    healthcheck:
+      test: curl -s -f http://localhost:9655/metrics
