@@ -1,4 +1,4 @@
-FROM golang:1.12 AS builder
+FROM docker.io/library/golang:1.14 AS builder
 
 # Dependencies
 RUN apt-get update \
@@ -19,7 +19,8 @@ COPY controllers /build/controllers
 RUN go build ./main.go
 RUN cp ./main /bin/s3bucket_exporter
 
-FROM debian:buster-slim
+FROM docker.io/library/debian:buster-slim
 COPY --from=builder /bin/s3bucket_exporter /bin/s3bucket_exporter
+RUN apt-get update && apt-get install -y curl
 WORKDIR /tmp
 ENTRYPOINT ["/bin/s3bucket_exporter"]

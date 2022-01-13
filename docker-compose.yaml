@@ -1,6 +1,6 @@
 services:
   s3bucketexporter:
-    image: docker.io/molu8bits/s3bucket_exporter:0.1
+    image: docker.io/molu8bits/s3bucket_exporter:0.3
     restart: always
     ports:
       - "9655:9655"
@@ -17,3 +17,7 @@ services:
       LOG_LEVEL: Info
     healthcheck:
       test: curl -s -f http://localhost:9655/metrics
+      timeout: 30s
+      interval: 2m
+      retries: 3
+      start_period: 30s
