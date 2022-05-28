@@ -1,3 +1,4 @@
+version: "3.5"
 services:
   s3bucketexporter:
     image: docker.io/molu8bits/s3bucket_exporter:0.3
@@ -11,9 +12,9 @@ services:
       S3_SECRET_KEY: mySecretKey
       S3_NAME: MyS3Endpoint2
       S3_REGION: us-east-1
-      S3_DISABLE_SSL: False
-      S3_DISABLE_ENDPOINT_HOST_PREFIX: True
-      S3_FORCE_PATH_STYLE: True
+      S3_DISABLE_SSL: "False"
+      S3_DISABLE_ENDPOINT_HOST_PREFIX: "True"
+      S3_FORCE_PATH_STYLE: "True"
       LOG_LEVEL: Info
     healthcheck:
       test: curl -s -f http://localhost:9655/metrics
