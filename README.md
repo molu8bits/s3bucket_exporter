@@ -2,6 +2,25 @@
 
 s3bucket_exporter collects informations about size and object list about all the buckets accessible by user. Was designed to work with ceph, but should work will all S3 compatible endpoints.
 
+## Badges
+
+[![License](https://img.shields.io/github/license/molu8bits/s3bucket_exporter)](/LICENSE)
+[![Release](https://img.shields.io/github/release/molu8bits/s3bucket_exporter.svg)](https://github.com/molu8bits/s3bucket_exporter/releases/latest)
+[![GitHub Releases Stats of s3bucket_exporter](https://img.shields.io/github/downloads/molu8bits/s3bucket_exporter/total.svg?logo=github)](https://somsubhra.github.io/github-release-stats/?username=molu8bits&repository=s3bucket_exporter)
+[![CI](https://github.com/molu8bits/s3bucket_exporter/actions/workflows/ci.yaml/badge.svg?branch=master&event=push)](https://github.com/molu8bits/s3bucket_exporter/actions/workflows/ci.yaml?branch=master&event=push)
+[![Frogbot Scan Pull Request](https://github.com/molu8bits/s3bucket_exporter/actions/workflows/frogbot-scan-pr-go.yml/badge.svg)](https://github.com/molu8bits/s3bucket_exporter/actions/workflows/frogbot-scan-pr-go.yml)
+[![Scanned by Frogbot](https://raw.github.com/jfrog/frogbot/master/images/frogbot-badge.svg)](https://github.com/jfrog/frogbot#readme)
+[![Go Report Card](https://goreportcard.com/badge/github.com/molu8bits/s3bucket_exporter)](https://goreportcard.com/report/github.com/molu8bits/s3bucket_exporter)
+![Docker Image Size](https://img.shields.io/docker/image-size/molu8bits/s3bucket_exporter.svg?sort=date)
+![Docker Image Version (latest by date):](https://img.shields.io/docker/v/molu8bits/s3bucket_exporter.svg?sort=date)
+![Docker Pulls](https://img.shields.io/docker/pulls/molu8bits/s3bucket_exporter.svg)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=s3bucket_exporter&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=s3bucket_exporter)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=s3bucket_exporter&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=s3bucket_exporter)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=s3bucket_exporter&metric=coverage)](https://sonarcloud.io/summary/new_code?id=s3bucket_exporter)
+[![codecov](https://codecov.io/github/molu8bits/s3bucket_exporter/branch/master/graph/badge.svg?token=6KIJFNB8WG)](https://codecov.io/github/molu8bits/s3bucket_exporter)
+
+[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B20660%2Fgithub.com%2Fmolu8bits%2Fs3bucket_exporter.svg?type=large)](https://app.fossa.com/projects/custom%2B20660%2Fgithub.com%2Fmolu8bits%2Fs3bucket_exporter?ref=badge_large)
+
 ## Getting started
 
 Run from command-line:
