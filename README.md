@@ -8,7 +8,7 @@ s3bucket_exporter collects informations about size and object list about all the
 [![Release](https://img.shields.io/github/release/molu8bits/s3bucket_exporter.svg)](https://github.com/molu8bits/s3bucket_exporter/releases/latest)
 [![GitHub Releases Stats of s3bucket_exporter](https://img.shields.io/github/downloads/molu8bits/s3bucket_exporter/total.svg?logo=github)](https://somsubhra.github.io/github-release-stats/?username=molu8bits&repository=s3bucket_exporter)
 [![CI](https://github.com/molu8bits/s3bucket_exporter/actions/workflows/ci.yaml/badge.svg?branch=master&event=push)](https://github.com/molu8bits/s3bucket_exporter/actions/workflows/ci.yaml?branch=master&event=push)
-[![Frogbot Scan Pull Request](https://github.com/molu8bits/s3bucket_exporter/actions/workflows/frogbot-scan-pr-go.yml/badge.svg)](https://github.com/molu8bits/s3bucket_exporter/actions/workflows/frogbot-scan-pr-go.yml)
+[![Frogbot Scan Pull Request](https://github.com/molu8bits/s3bucket_exporter/actions/workflows/frogbot-scan-pr-go.yaml/badge.svg)](https://github.com/molu8bits/s3bucket_exporter/actions/workflows/frogbot-scan-pr-go.yml)
 [![Scanned by Frogbot](https://raw.github.com/jfrog/frogbot/master/images/frogbot-badge.svg)](https://github.com/jfrog/frogbot#readme)
 [![Go Report Card](https://goreportcard.com/badge/github.com/molu8bits/s3bucket_exporter)](https://goreportcard.com/report/github.com/molu8bits/s3bucket_exporter)
 ![Docker Image Size](https://img.shields.io/docker/image-size/molu8bits/s3bucket_exporter.svg?sort=date)
