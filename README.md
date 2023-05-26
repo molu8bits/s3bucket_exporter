@@ -19,7 +19,7 @@ s3bucket_exporter collects informations about size and object list about all the
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=s3bucket_exporter&metric=coverage)](https://sonarcloud.io/summary/new_code?id=s3bucket_exporter)
 [![codecov](https://codecov.io/github/molu8bits/s3bucket_exporter/branch/master/graph/badge.svg?token=6KIJFNB8WG)](https://codecov.io/github/molu8bits/s3bucket_exporter)
 
-[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B20660%2Fgithub.com%2Fmolu8bits%2Fs3bucket_exporter.svg?type=large)](https://app.fossa.com/projects/custom%2B20660%2Fgithub.com%2Fmolu8bits%2Fs3bucket_exporter?ref=badge_large)
+[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B37992%2Fgithub.com%2Fmolu8bits%2Fs3bucket_exporter.svg?type=large)](https://app.fossa.com/projects/custom%2B37992%2Fgithub.com%2Fmolu8bits%2Fs3bucket_exporter?ref=badge_large)
 
 ## Getting started
 
