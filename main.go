@@ -6,11 +6,13 @@ import (
 	"os"
 	"strconv"
 
-	"./controllers"
+	// "./controllers"
+	"github.com/molu8bits/s3bucket_exporter/controllers"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	log "github.com/Sirupsen/logrus"
+	// log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 )
 
 var (
