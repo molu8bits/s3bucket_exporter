@@ -1,0 +1,166 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+      - "feature/ci-actions"
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  Builds:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+
+      - name: Build
+        run: go build -v
+
+      - name: Test
+        run: |
+          go test -coverprofile=./cov-report.out ./...
+          # go tool cover -html=cov-report.out -o coverage-report.html
+          go test -race -coverprofile=coverage.out -covermode=atomic
+
+      - name: Cache test coverage report
+        uses: actions/cache@v3
+        id: restore-test-coverage-report
+        with:
+          path: ./cov-report.out
+          key: ${{ github.sha }}
+
+  Static-Check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.20.x
+
+      # Generate mocks
+      - name: Generate mocks
+        run: go generate ./...
+
+      - name: Static Code Analysis
+        uses: golangci/golangci-lint-action@v3
+        with:
+          skip-cache: true
+          skip-pkg-cache: true
+          skip-build-cache: true
+          args: |
+            --timeout 5m --out-${NO_FUTURE}format checkstyle:golangci-report.xml --issues-exit-code 0 --enable errcheck,gosimple,govet,ineffassign,staticcheck,typecheck,unused,gocritic,asasalint,asciicheck,errchkjson,exportloopref,forcetypeassert,makezero,nilerr,unparam,unconvert,wastedassign,usestdlibvars 
+          # --timeout 5m --out-format checkstyle:golangci-report.xml -issues-exit-code 0 
+
+      - name: Cache golangci-lint report
+        uses: actions/cache@v3
+        id: restore-golangci-lint-report
+        with:
+          path: ./golangci-report.xml
+          key: ${{ github.sha }}
+
+  Go-Sec:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v3
+      
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.20.x
+
+      - name: Run Gosec Security Scanner
+        uses: securego/gosec@master
+        with:
+          args: -no-fail -exclude-dir=\.*test\.* -fmt=sonarqube -out=./gosec-report.json -stdout ./...
+          # args: -exclude=G204,G301,G302,G304,G306 -exclude-dir=\.*test\.* ./...
+          # args: -no-fail -exclude-dir=\.*test\.* --verbose sonar -out=./gosec-report.json ./...
+
+      - name: Cache gosec report
+        uses: actions/cache@v3
+        id: restore-gosec-report
+        with:
+          path: ./gosec-report.json
+          key: ${{ github.sha }}
+
+
+  SonarCloud:
+    runs-on: ubuntu-latest
+    needs: [Static-Check, Go-Sec, Builds]
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v3
+      
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.20.x
+      
+      - uses: actions/cache@v3
+        id: restore-gosec-report
+        with:
+          path: ./gosec-report.json
+          key: ${{ github.sha }}
+
+      - uses: actions/cache@v3
+        id: restore-golangci-lint-report
+        with:
+          path: ./golangci-report.xml
+          key: ${{ github.sha }}
+
+      - uses: actions/cache@v3
+        id: restore-test-coverage-report
+        with:
+          path: ./cov-report.out
+          key: ${{ github.sha }}
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v1.9.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  CodeCov:
+    runs-on: ubuntu-latest
+    needs: [Builds]
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v3
+      
+      - uses: actions/cache@v3
+        id: restore-test-coverage-report
+        with:
+          path: ./cov-report.out
+          key: ${{ github.sha }}
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: cov-report.out
+          flags: unittests
+          verbose: true
+
+  LegalCheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout tree
+        uses: actions/checkout@v3
+
+      - name: Run FOSSA scan and upload build data
+        uses: fossa-contrib/fossa-action@v2
+        with:
+          fossa-api-key: ${{ secrets.FOSSA_API_KEY }}
