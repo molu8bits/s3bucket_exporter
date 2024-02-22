@@ -1,6 +1,6 @@
 module github.com/molu8bits/s3bucket_exporter
 
-go 1.20
+go 1.22
 
 require (
 	github.com/aws/aws-sdk-go v1.44.271 // indirect
